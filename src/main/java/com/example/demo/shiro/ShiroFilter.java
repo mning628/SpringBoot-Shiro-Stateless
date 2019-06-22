@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class JwtFilter extends BasicHttpAuthenticationFilter
+public class ShiroFilter extends BasicHttpAuthenticationFilter
 {
     @Value("${jwt.anonymous.urls}")
     private String anonymousStr;

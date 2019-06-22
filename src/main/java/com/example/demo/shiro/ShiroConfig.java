@@ -35,26 +35,26 @@ public class ShiroConfig
     }
 
 
-    @Bean
-    public ShiroFilterFactoryBean shiroFilter(DefaultWebSecurityManager securityManager, JwtFilter jwtFilter)
+    @Bean(name = "shiroFilter")
+    public ShiroFilterFactoryBean shiroFilter(DefaultWebSecurityManager securityManager, ShiroFilter shiroFilter)
     {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
         Map<String, Filter> filters = new HashMap<>(1);
-        filters.put("jwtFilter", jwtFilter);
+        filters.put("myFilter", shiroFilter);
         shiroFilterFactoryBean.setFilters(filters);
 
         Map<String, String> filterChainDefinitionMap = new HashMap<>(4);
-        filterChainDefinitionMap.put("/**", "jwtFilter");
+        filterChainDefinitionMap.put("/**", "myFilter");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
 
     @Bean
-    public JwtFilter jwtFilter()
+    public ShiroFilter jwtFilter()
     {
-        return new JwtFilter();
+        return new ShiroFilter();
     }
 
 
